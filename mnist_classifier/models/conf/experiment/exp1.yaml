@@ -1,0 +1,6 @@
+dimensions:
+    input_dim: 784
+    first_hidden_dim: 128
+    second_hidden_dim: 64
+    third_hidden_dim: 32
+    output_dim: 10
