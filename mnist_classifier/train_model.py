@@ -27,7 +27,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #     "--model_location", default="mnist_classifier/models/trained_models/", help="number of epochs to train for"
 # )
 
-
 @hydra.main(config_path = "conf", config_name = "default_training_conf.yaml")
 def train(config):
     """Train a model on MNIST."""
