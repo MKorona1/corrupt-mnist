@@ -15,7 +15,7 @@ def cli():
 # @click.argument('processed_location')
 def get_data(raw_location, processed_location):
     """Return train and test dataloaders for MNIST."""
-    print("Adding to check dvc files")
+    
     n = 6  # number of files
 
     train_data = [torch.load(f"{raw_location}/train_images_{i}.pt") for i in range(n)]
