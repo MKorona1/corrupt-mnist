@@ -25,7 +25,7 @@ class DataModule(LightningDataModule):
     def process_data(self):
         """Return train and test dataloaders for MNIST."""
         
-        n = 6  # number of files
+        n = 10  # number of files
 
         train_data = [torch.load(f"{self.raw_location}/train_images_{i}.pt") for i in range(n)]
         train_labels = [torch.load(f"{self.raw_location}/train_target_{i}.pt") for i in range(n)]
