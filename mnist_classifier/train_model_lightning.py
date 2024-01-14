@@ -16,5 +16,5 @@ checkpoint_callback = ModelCheckpoint(
 )
 
 trainloader = DataModule().train_dataloader()
-trainer = Trainer(limit_train_batches=0.2, max_epochs=5, logger=pytorch_lightning.loggers.WandbLogger(project="mnist_classifier"))
+trainer = Trainer(limit_train_batches=0.2, max_epochs=5, logger=pl.loggers.WandbLogger(project="mnist_classifier"))
 trainer.fit(model, trainloader)
