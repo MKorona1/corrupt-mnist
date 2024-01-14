@@ -178,3 +178,7 @@ cython_debug/
 
 data/
 /data
+
+lightning_logs
+outputs
+wandb

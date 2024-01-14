@@ -9,13 +9,12 @@ log = logging.getLogger(__name__)
 class MyAwesomeModel(nn.Module):
     """My awesome model."""
 
-    def __init__(self):
+    def __init__(self, input_dim, first_hidden_dim, second_hidden_dim, third_hidden_dim, output_dim):
         super().__init__()
-
-        self.fc1 = nn.Linear(784, 128)
-        self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, 32)
-        self.fc4 = nn.Linear(32, 10)
+        self.fc1 = nn.Linear(input_dim, first_hidden_dim)
+        self.fc2 = nn.Linear(first_hidden_dim, second_hidden_dim)
+        self.fc3 = nn.Linear(second_hidden_dim, third_hidden_dim)
+        self.fc4 = nn.Linear(third_hidden_dim, output_dim)
 
     def forward(self, x):
         x = x.view(x.shape[0], -1)
