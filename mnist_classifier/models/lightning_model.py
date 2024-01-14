@@ -5,8 +5,6 @@ import torch.nn.functional as F
 from pytorch_lightning.utilities.types import OptimizerLRScheduler
 from torch import nn, optim
 
-import wandb
-
 log = logging.getLogger(__name__)
 
 

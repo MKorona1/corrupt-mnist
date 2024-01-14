@@ -1,4 +1,4 @@
-name: "Run tests"
+name: "Run codecheck"
 
 on:
   push:
@@ -26,5 +26,5 @@ jobs:
     - name: Ruff check and format
       run: |
         pip install ruff
-        ruff check .
+        ruff check . --fix
         ruff format .

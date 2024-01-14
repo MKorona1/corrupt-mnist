@@ -1,5 +1,4 @@
 import pytorch_lightning as pl
-import torch
 from omegaconf import OmegaConf
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint
