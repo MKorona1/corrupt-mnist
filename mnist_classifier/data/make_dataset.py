@@ -17,7 +17,7 @@ from pytorch_lightning import LightningDataModule
 # @click.argument('processed_location')
 
 class DataModule(LightningDataModule):
-    def __init__(self, raw_location="data/raw/", processed_location="data/processed/"):
+    def __init__(self, raw_location='data/raw/', processed_location='data/processed/'):
         super().__init__()
         self.raw_location = raw_location
         self.processed_location = processed_location
@@ -27,14 +27,14 @@ class DataModule(LightningDataModule):
 
         n = 10  # number of files
 
-        train_data = [torch.load(f"{self.raw_location}/train_images_{i}.pt") for i in range(n)]
-        train_labels = [torch.load(f"{self.raw_location}/train_target_{i}.pt") for i in range(n)]
+        train_data = [torch.load(f'{self.raw_location}/train_images_{i}.pt') for i in range(n)]
+        train_labels = [torch.load(f'{self.raw_location}/train_target_{i}.pt') for i in range(n)]
 
         train_data = torch.cat(train_data, dim=0)
         train_labels = torch.cat(train_labels, dim=0)
 
-        test_data = torch.load(f"{self.raw_location}/test_images.pt")
-        test_labels = torch.load(f"{self.raw_location}/test_target.pt")
+        test_data = torch.load(f'{self.raw_location}/test_images.pt')
+        test_labels = torch.load(f'{self.raw_location}/test_target.pt')
 
         train_data = train_data.unsqueeze(1)
         test_data = test_data.unsqueeze(1)
@@ -47,21 +47,21 @@ class DataModule(LightningDataModule):
         std_test = torch.std(test_data, dim=(2, 3), keepdim=True)
         test_data = (test_data - mu_test) / std_test
 
-        torch.save(train_data, f"{self.processed_location}/processed_data_train.pt")
-        torch.save(train_labels, f"{self.processed_location}/processed_labels_train.pt")
+        torch.save(train_data, f'{self.processed_location}/processed_data_train.pt')
+        torch.save(train_labels, f'{self.processed_location}/processed_labels_train.pt')
 
-        torch.save(test_data, f"{self.processed_location}/processed_data_test.pt")
-        torch.save(test_labels, f"{self.processed_location}/processed_labels_test.pt")
+        torch.save(test_data, f'{self.processed_location}/processed_data_test.pt')
+        torch.save(test_labels, f'{self.processed_location}/processed_labels_test.pt')
 
     def get_train_data(self):
-        train_data = torch.load(f"{self.processed_location}/processed_data_train.pt")
-        train_labels = torch.load(f"{self.processed_location}/processed_labels_train.pt")
+        train_data = torch.load(f'{self.processed_location}/processed_data_train.pt')
+        train_labels = torch.load(f'{self.processed_location}/processed_labels_train.pt')
         train_dataset = TensorDataset(train_data, train_labels)
         return train_dataset
 
     def get_test_data(self):
-        test_data = torch.load(f"{self.processed_location}/processed_data_test.pt")
-        test_labels = torch.load(f"{self.processed_location}/processed_labels_test.pt")
+        test_data = torch.load(f'{self.processed_location}/processed_data_test.pt')
+        test_labels = torch.load(f'{self.processed_location}/processed_labels_test.pt')
         test_dataset = TensorDataset(test_data, test_labels)
         return test_dataset
 
@@ -75,7 +75,7 @@ class DataModule(LightningDataModule):
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # Get the data and process it
     data = DataModule()
     data.process_data()

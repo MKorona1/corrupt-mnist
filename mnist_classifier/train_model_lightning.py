@@ -6,7 +6,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from data.make_dataset import DataModule
 from models.lightning_model import MyAwesomeModel
 
-model_config = OmegaConf.load("mnist_classifier/models/conf/experiment/exp1.yaml")
+model_config = OmegaConf.load('mnist_classifier/models/conf/experiment/exp1.yaml')
 dimensions = model_config.dimensions
 
 model = MyAwesomeModel(
@@ -17,8 +17,8 @@ model = MyAwesomeModel(
     dimensions.output_dim,
 )
 
-checkpoint_callback = ModelCheckpoint(dirpath="./models", monitor="train_loss", mode="min")
+checkpoint_callback = ModelCheckpoint(dirpath='./models', monitor='train_loss', mode='min')
 
 trainloader = DataModule().train_dataloader()
-trainer = Trainer(limit_train_batches=0.2, max_epochs=5, logger=pl.loggers.WandbLogger(project="mnist_classifier"))
+trainer = Trainer(limit_train_batches=0.2, max_epochs=5, logger=pl.loggers.WandbLogger(project='mnist_classifier'))
 trainer.fit(model, trainloader)

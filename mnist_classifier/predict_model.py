@@ -1,7 +1,7 @@
 import click
 import torch
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 @click.group()
@@ -11,8 +11,8 @@ def cli():
 
 
 @click.command()
-@click.option("--model", default="mnist_classifier/models/trained_models/model.pt", help="Model location")
-@click.option("--n_images", default=10, help="Number of images to predict")
+@click.option('--model', default='mnist_classifier/models/trained_models/model.pt', help='Model location')
+@click.option('--n_images', default=10, help='Number of images to predict')
 def predict(model, n_images):
     """Run prediction for a given model and dataloader.
 
@@ -26,8 +26,8 @@ def predict(model, n_images):
     """
 
     model = torch.load(model)
-    test_data = torch.load("data/processed/processed_data_test.pt")[: int(n_images)]
-    test_labels = torch.load("data/processed/processed_labels_test.pt")[: int(n_images)]
+    test_data = torch.load('data/processed/processed_data_test.pt')[: int(n_images)]
+    test_labels = torch.load('data/processed/processed_labels_test.pt')[: int(n_images)]
 
     test_set = torch.utils.data.TensorDataset(test_data, test_labels)
     testloader = torch.utils.data.DataLoader(test_set, batch_size=64, shuffle=True)
@@ -53,6 +53,6 @@ def predict(model, n_images):
 
 # cli.add_command(predict)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # cli()
     test_preds, test_labels = predict()

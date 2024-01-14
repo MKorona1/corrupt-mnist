@@ -10,7 +10,7 @@ from torch import nn, optim
 
 from models.model import MyAwesomeModel
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # @click.group()
 # def cli():
@@ -27,20 +27,20 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # )
 
 
-@hydra.main(config_path="conf", config_name="default_training_conf.yaml")
+@hydra.main(config_path='conf', config_name='default_training_conf.yaml')
 def train(config):
     """Train a model on MNIST."""
 
     hparams = config.experiment.hyperparameters
     log = logging.getLogger(__name__)
 
-    log.info("Training day and night")
-    log.info(f"Learning rate: {hparams.lr}")
-    log.info(f"Batch size: {hparams.batch_size}")
-    log.info(f"Number of epochs: {hparams.num_epochs}")
+    log.info('Training day and night')
+    log.info(f'Learning rate: {hparams.lr}')
+    log.info(f'Batch size: {hparams.batch_size}')
+    log.info(f'Number of epochs: {hparams.num_epochs}')
 
     # TODO: Implement training loop here
-    model_config = OmegaConf.load(to_absolute_path("mnist_classifier/models/conf/experiment/exp1.yaml"))
+    model_config = OmegaConf.load(to_absolute_path('mnist_classifier/models/conf/experiment/exp1.yaml'))
     dimensions = model_config.dimensions
 
     model = MyAwesomeModel(
@@ -50,8 +50,8 @@ def train(config):
         dimensions.third_hidden_dim,
         dimensions.output_dim,
     ).to(device)
-    train_data = torch.load(to_absolute_path("data/processed/processed_data_train.pt"))
-    train_labels = torch.load(to_absolute_path("data/processed/processed_labels_train.pt"))
+    train_data = torch.load(to_absolute_path('data/processed/processed_data_train.pt'))
+    train_labels = torch.load(to_absolute_path('data/processed/processed_labels_train.pt'))
 
     train_set = torch.utils.data.TensorDataset(train_data, train_labels)
     trainloader = torch.utils.data.DataLoader(train_set, batch_size=hparams.batch_size, shuffle=True)
@@ -73,16 +73,16 @@ def train(config):
             optimizer.step()
 
             # running_loss += loss.item()
-        log.info(f"Epoch {epoch} Loss {loss}")
+        log.info(f'Epoch {epoch} Loss {loss}')
         losses.append(loss.item())
 
     # plt.plot(list(range(num_epochs)), losses)
     # plt.savefig("reports/figures/training_curve.png")
 
-    torch.save(model, to_absolute_path(f"{hparams.model_location}/model.pt"))
+    torch.save(model, to_absolute_path(f'{hparams.model_location}/model.pt'))
 
 
 # cli.add_command(train)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     train()

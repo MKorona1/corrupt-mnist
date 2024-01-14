@@ -49,8 +49,8 @@ class MyAwesomeModel(pl.LightningModule):
         preds = self(images)
         loss = self.criterium(preds, labels)
         acc = (labels == preds.argmax(dim=-1)).float().mean()
-        self.log("train_loss", loss)
-        self.log("train_acc", acc)
+        self.log('train_loss', loss)
+        self.log('train_acc', acc)
         return loss
 
     def configure_optimizers(self):
