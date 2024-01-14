@@ -1,8 +1,7 @@
 import click
 import torch
-from torch.utils.data import TensorDataset, DataLoader
 from pytorch_lightning import LightningDataModule
-
+from torch.utils.data import DataLoader, TensorDataset
 
 # @click.group()
 # def cli():
@@ -15,6 +14,7 @@ from pytorch_lightning import LightningDataModule
 # @click.option("--processed_location", default="data/processed/", help="Path to save processed data")
 # @click.argument('raw_location')
 # @click.argument('processed_location')
+
 
 class DataModule(LightningDataModule):
     def __init__(self, raw_location='data/raw/', processed_location='data/processed/'):
@@ -72,7 +72,6 @@ class DataModule(LightningDataModule):
     def test_dataloader(self):
         test_dataset = self.get_test_data()
         return DataLoader(test_dataset, batch_size=64, shuffle=True)
-
 
 
 if __name__ == '__main__':
