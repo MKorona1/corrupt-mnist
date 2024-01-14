@@ -1,10 +1,12 @@
-import torch.nn.functional as F
-from torch import nn
-from omegaconf import DictConfig
 import logging
+
 import hydra
+import torch.nn.functional as F
+from omegaconf import DictConfig
+from torch import nn
 
 log = logging.getLogger(__name__)
+
 
 class MyAwesomeModel(nn.Module):
     """My awesome model."""
@@ -25,7 +27,8 @@ class MyAwesomeModel(nn.Module):
         x = F.log_softmax(self.fc4(x), dim=1)
 
         return x
-    
+
+
 # hydra.core.global_hydra.GlobalHydra.instance().clear()
 # @hydra.main(config_path="conf", config_name="default_model_conf.yaml")
 # def define_model(cfg: DictConfig):
@@ -41,7 +44,7 @@ class MyAwesomeModel(nn.Module):
 #     )
 
 #     log.info("Input dim:", dimensions.input_dim)
-    
+
 #     return model
 
 

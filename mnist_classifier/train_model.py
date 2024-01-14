@@ -1,15 +1,14 @@
+import logging
+
 import click
+import hydra
 import torch
+from hydra.utils import to_absolute_path
 from matplotlib import pyplot as plt
+from omegaconf import OmegaConf
 from torch import nn, optim
 
 from models.model import MyAwesomeModel
-
-import hydra
-import logging
-
-from hydra.utils import to_absolute_path
-from omegaconf import OmegaConf
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -27,7 +26,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #     "--model_location", default="mnist_classifier/models/trained_models/", help="number of epochs to train for"
 # )
 
-@hydra.main(config_path = "conf", config_name = "default_training_conf.yaml")
+
+@hydra.main(config_path="conf", config_name="default_training_conf.yaml")
 def train(config):
     """Train a model on MNIST."""
 
@@ -40,10 +40,16 @@ def train(config):
     log.info(f"Number of epochs: {hparams.num_epochs}")
 
     # TODO: Implement training loop here
-    model_config = OmegaConf.load(to_absolute_path('mnist_classifier/models/conf/experiment/exp1.yaml'))
+    model_config = OmegaConf.load(to_absolute_path("mnist_classifier/models/conf/experiment/exp1.yaml"))
     dimensions = model_config.dimensions
 
-    model = MyAwesomeModel(dimensions.input_dim, dimensions.first_hidden_dim, dimensions.second_hidden_dim, dimensions.third_hidden_dim, dimensions.output_dim).to(device)
+    model = MyAwesomeModel(
+        dimensions.input_dim,
+        dimensions.first_hidden_dim,
+        dimensions.second_hidden_dim,
+        dimensions.third_hidden_dim,
+        dimensions.output_dim,
+    ).to(device)
     train_data = torch.load(to_absolute_path("data/processed/processed_data_train.pt"))
     train_labels = torch.load(to_absolute_path("data/processed/processed_labels_train.pt"))
 

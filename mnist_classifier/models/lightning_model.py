@@ -1,11 +1,14 @@
-from pytorch_lightning.utilities.types import OptimizerLRScheduler
-import torch.nn.functional as F
-from torch import nn, optim
 import logging
+
 import pytorch_lightning as pl
+import torch.nn.functional as F
+from pytorch_lightning.utilities.types import OptimizerLRScheduler
+from torch import nn, optim
+
 import wandb
 
 log = logging.getLogger(__name__)
+
 
 class MyAwesomeModel(pl.LightningModule):
     """My awesome model."""
@@ -37,21 +40,20 @@ class MyAwesomeModel(pl.LightningModule):
             nn.Flatten(),  # [B, 128, 11, 11] -> [B, 64 * 12 * 12]
             nn.Linear(128 * 11 * 11, 10),
         )
-        
+
         self.criterium = nn.CrossEntropyLoss()
 
     def forward(self, x):
         return self.classifier(self.backbone(x))
-    
+
     def training_step(self, batch):
         images, labels = batch
         preds = self(images)
         loss = self.criterium(preds, labels)
         acc = (labels == preds.argmax(dim=-1)).float().mean()
-        self.log('train_loss', loss)
-        self.log('train_acc', acc)
+        self.log("train_loss", loss)
+        self.log("train_acc", acc)
         return loss
-    
+
     def configure_optimizers(self):
         return optim.Adam(self.parameters(), lr=1e-2)
-    

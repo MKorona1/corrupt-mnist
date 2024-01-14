@@ -1,5 +1,6 @@
 from mnist_classifier.data.make_dataset import DataModule
 
+
 def test_data():
     data = DataModule()
     train_dataset = data.get_train_data()
