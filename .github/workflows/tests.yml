@@ -42,17 +42,13 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
 
-    - name: Pull remote data
-      run: |
-        pip install dvc
-        pip install -U pip
-        pip install "dvc[gdrive]"
-        pip install "dvc[all]"
-        # dvc remote add -d remote_storage gs://ml_ops_group_75_data_bucket/
-        dvc pull
+    - uses: iterative/setup-dvc@v1
+    - name: Get data
+      run: dvc pull
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
 
     - name: Test with pytest
       run: |
         pip install pytest
         pytest -v
-        
