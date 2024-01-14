@@ -3,7 +3,7 @@ from models.lightning_model import MyAwesomeModel
 from omegaconf import OmegaConf
 from data.make_dataset import DataModule
 from pytorch_lightning.callbacks import ModelCheckpoint
-import pytorch_lightning
+import pytorch_lightning as pl
 import torch
 
 model_config = OmegaConf.load('mnist_classifier/models/conf/experiment/exp1.yaml')

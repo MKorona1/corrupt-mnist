@@ -53,18 +53,25 @@ class DataModule(LightningDataModule):
         torch.save(test_data, f"{self.processed_location}/processed_data_test.pt")
         torch.save(test_labels, f"{self.processed_location}/processed_labels_test.pt")
 
-    def train_dataloader(self):
+    def get_train_data(self):
         train_data = torch.load(f"{self.processed_location}/processed_data_train.pt")
         train_labels = torch.load(f"{self.processed_location}/processed_labels_train.pt")
         train_dataset = TensorDataset(train_data, train_labels)
-        return DataLoader(train_dataset, batch_size=64, shuffle=True)
+        return train_dataset
     
-    def test_dataloader(self):
+    def get_test_data(self):
         test_data = torch.load(f"{self.processed_location}/processed_data_test.pt")
         test_labels = torch.load(f"{self.processed_location}/processed_labels_test.pt")
         test_dataset = TensorDataset(test_data, test_labels)
-        return DataLoader(test_dataset, batch_size=64, shuffle=True)
+        return test_dataset
 
+    def train_dataloader(self):
+        train_dataset = self.get_train_data()
+        return DataLoader(train_dataset, batch_size=64, shuffle=True)
+    
+    def test_dataloader(self):
+        test_dataset = self.get_test_data()
+        return DataLoader(test_dataset, batch_size=64, shuffle=True)
 
 
 
@@ -72,9 +79,3 @@ if __name__ == "__main__":
     # Get the data and process it
     data = DataModule()
     data.process_data()
-    train_loader = data.train_dataloader()
-    images, labels = next(iter(train_loader))
-    # print(dataiter._dataset)
-    # images1, labels1 = dataiter.next()
-    print(images.shape)
-

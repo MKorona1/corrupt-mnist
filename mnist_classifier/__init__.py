@@ -1,2 +1,2 @@
-from mnist_classifier.models.model import MyNeuralNet
+from mnist_classifier.models.lightning_model import MyAwesomeModel
 from mnist_classifier.predict_model import predict

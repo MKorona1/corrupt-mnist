@@ -2,12 +2,12 @@ from pytorch_lightning.utilities.types import OptimizerLRScheduler
 import torch.nn.functional as F
 from torch import nn, optim
 import logging
-from pytorch_lightning import LightningModule
+import pytorch_lightning as pl
 import wandb
 
 log = logging.getLogger(__name__)
 
-class MyAwesomeModel(LightningModule):
+class MyAwesomeModel(pl.LightningModule):
     """My awesome model."""
 
     def __init__(self, input_dim, first_hidden_dim, second_hidden_dim, third_hidden_dim, output_dim):
