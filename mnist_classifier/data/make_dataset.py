@@ -24,7 +24,7 @@ class DataModule(LightningDataModule):
 
     def process_data(self):
         """Return train and test dataloaders for MNIST."""
-        
+
         n = 10  # number of files
 
         train_data = [torch.load(f"{self.raw_location}/train_images_{i}.pt") for i in range(n)]
@@ -58,7 +58,7 @@ class DataModule(LightningDataModule):
         train_labels = torch.load(f"{self.processed_location}/processed_labels_train.pt")
         train_dataset = TensorDataset(train_data, train_labels)
         return train_dataset
-    
+
     def get_test_data(self):
         test_data = torch.load(f"{self.processed_location}/processed_data_test.pt")
         test_labels = torch.load(f"{self.processed_location}/processed_labels_test.pt")
@@ -68,7 +68,7 @@ class DataModule(LightningDataModule):
     def train_dataloader(self):
         train_dataset = self.get_train_data()
         return DataLoader(train_dataset, batch_size=64, shuffle=True)
-    
+
     def test_dataloader(self):
         test_dataset = self.get_test_data()
         return DataLoader(test_dataset, batch_size=64, shuffle=True)
