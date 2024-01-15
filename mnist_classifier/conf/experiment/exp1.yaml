@@ -1,5 +1,5 @@
 hyperparameters:
   lr: 1e-3
   batch_size: 64
-  num_epochs: 20
+  num_epochs: 2
   model_location: "mnist_classifier/models/trained_models/"
