@@ -11,7 +11,7 @@ COPY mnist_classifier/ mnist_classifier/
 
 # Copy the DVC files
 COPY data.dvc .
-COPY .dvc ./.dvc
+COPY .dvc/ .dvc/
 
 # Run DVC pull to fetch the data
 
