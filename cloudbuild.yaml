@@ -1,5 +1,9 @@
 steps:
-- name: 'gcr.io/corrupt-mnist/training'
-  args: ['build', '-t', 'gcr.io/mlops-test-project-410913/training', '.']
-- name: 'gcr.io/corrupt-mnist/training'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - build
+  - "--tag=gcr.io/mlops-test-project-410913/training"
+  - "--file=./dockerfiles/train_model.dockerfile"
+  - .
+- name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/mlops-test-project-410913/training']
