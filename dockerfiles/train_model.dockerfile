@@ -8,9 +8,16 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY mnist_classifier/ mnist_classifier/
-COPY data/ data/
+
+# Copy the DVC files
+COPY data.dvc .
+COPY .dvc ./.dvc
+
+# Run DVC pull to fetch the data
 
 WORKDIR /
+RUN pip install dvc "dvc[gs]"
+RUN dvc pull
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
