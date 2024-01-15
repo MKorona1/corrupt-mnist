@@ -8,6 +8,7 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY mnist_classifier/ mnist_classifier/
+COPY .git/ .git/
 
 # Copy the DVC files
 COPY data.dvc .
