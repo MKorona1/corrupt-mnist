@@ -47,21 +47,21 @@ class DataModule(LightningDataModule):
         std_test = torch.std(test_data, dim=(2, 3), keepdim=True)
         test_data = (test_data - mu_test) / std_test
 
-        torch.save(train_data, f'{self.processed_location}/processed_data_train.pt')
-        torch.save(train_labels, f'{self.processed_location}/processed_labels_train.pt')
+        torch.save(train_data, f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_data_train.pt')
+        torch.save(train_labels, f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_labels_train.pt')
 
-        torch.save(test_data, f'{self.processed_location}/processed_data_test.pt')
-        torch.save(test_labels, f'{self.processed_location}/processed_labels_test.pt')
+        torch.save(test_data, f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_data_test.pt')
+        torch.save(test_labels, f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_labels_test.pt')
 
     def get_train_data(self):
-        train_data = torch.load(f'{self.processed_location}/processed_data_train.pt')
-        train_labels = torch.load(f'{self.processed_location}/processed_labels_train.pt')
+        train_data = torch.load(f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_data_train.pt')
+        train_labels = torch.load(f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_labels_train.pt')
         train_dataset = TensorDataset(train_data, train_labels)
         return train_dataset
 
     def get_test_data(self):
-        test_data = torch.load(f'{self.processed_location}/processed_data_test.pt')
-        test_labels = torch.load(f'{self.processed_location}/processed_labels_test.pt')
+        test_data = torch.load(f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_data_test.pt')
+        test_labels = torch.load(f'/gcs/corrupt_mnist_mlops/{self.processed_location}/processed_labels_test.pt')
         test_dataset = TensorDataset(test_data, test_labels)
         return test_dataset
 
