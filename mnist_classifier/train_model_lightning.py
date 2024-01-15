@@ -20,5 +20,5 @@ model = MyAwesomeModel(
 checkpoint_callback = ModelCheckpoint(dirpath='./models', monitor='train_loss', mode='min')
 
 trainloader = DataModule().train_dataloader()
-trainer = Trainer(limit_train_batches=0.2, max_epochs=5, logger=pl.loggers.WandbLogger(project='mnist_classifier'))
+trainer = Trainer(limit_train_batches=0.2, max_epochs=5, logger=pl.loggers.WandbLogger(project='mnist_classifier'), accelerator='cpu')
 trainer.fit(model, trainloader)
