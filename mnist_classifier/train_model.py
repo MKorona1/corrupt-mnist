@@ -50,8 +50,9 @@ def train(config):
         dimensions.third_hidden_dim,
         dimensions.output_dim,
     ).to(device)
-    train_data = torch.load(to_absolute_path('data/processed/processed_data_train.pt'))
-    train_labels = torch.load(to_absolute_path('data/processed/processed_labels_train.pt'))
+
+    train_data = torch.load(to_absolute_path('/gcs/corrupt_mnist_mlops/data/processed/processed_data_train.pt'))
+    train_labels = torch.load(to_absolute_path('/gcs/corrupt_mnist_mlops/data/processed/processed_labels_train.pt'))
 
     train_set = torch.utils.data.TensorDataset(train_data, train_labels)
     trainloader = torch.utils.data.DataLoader(train_set, batch_size=hparams.batch_size, shuffle=True)

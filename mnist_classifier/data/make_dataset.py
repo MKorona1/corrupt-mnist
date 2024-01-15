@@ -27,14 +27,14 @@ class DataModule(LightningDataModule):
 
         n = 10  # number of files
 
-        train_data = [torch.load(f'{self.raw_location}/train_images_{i}.pt') for i in range(n)]
-        train_labels = [torch.load(f'{self.raw_location}/train_target_{i}.pt') for i in range(n)]
+        train_data = [torch.load(f'/gcs/corrupt_mnist_mlops/{self.raw_location}/train_images_{i}.pt') for i in range(n)]
+        train_labels = [torch.load(f'/gcs/corrupt_mnist_mlops/{self.raw_location}/train_target_{i}.pt') for i in range(n)]
 
         train_data = torch.cat(train_data, dim=0)
         train_labels = torch.cat(train_labels, dim=0)
 
-        test_data = torch.load(f'{self.raw_location}/test_images.pt')
-        test_labels = torch.load(f'{self.raw_location}/test_target.pt')
+        test_data = torch.load(f'/gcs/corrupt_mnist_mlops/{self.raw_location}/test_images.pt')
+        test_labels = torch.load(f'/gcs/corrupt_mnist_mlops/{self.raw_location}/test_target.pt')
 
         train_data = train_data.unsqueeze(1)
         test_data = test_data.unsqueeze(1)

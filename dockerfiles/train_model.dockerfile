@@ -9,16 +9,16 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
-COPY mnist_classifier/ mnist_classifier/
+COPY mnist_classifier/ mnist_classifier/s
 # COPY .git/ .git/
 
 # Run DVC pull to fetch the data
-RUN pip install dvc "dvc[gs]"
-RUN dvc init --no-scm
-COPY .dvc .dvc
-COPY data.dvc data.dvc
-RUN dvc config core.no_scm true
-RUN dvc pull --verbose
+# RUN pip install dvc "dvc[gs]"
+# RUN dvc init --no-scm
+# COPY .dvc .dvc
+# COPY data.dvc data.dvc
+# RUN dvc config core.no_scm true
+# RUN dvc pull --verbose
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
