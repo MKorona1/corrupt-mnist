@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
-COPY mnist_classifier/ mnist_classifier/s
+COPY mnist_classifier/ mnist_classifier/
 # COPY .git/ .git/
 
 # Run DVC pull to fetch the data
@@ -22,4 +22,4 @@ COPY mnist_classifier/ mnist_classifier/s
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "mnist_classifier/train_model.py"]
+ENTRYPOINT ["python", "-u", "mnist_classifier/train_model_lightning.py"]
